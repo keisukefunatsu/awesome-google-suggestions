@@ -95,7 +95,6 @@ class DisplayGoogleSuggestions
           	position: absolute;
           	pointer-events: none;
           }
-
           .awesome-google-suggestion-results:after {
           	border-color: rgba(136, 183, 213, 0);
           	border-bottom-color: #d7d9da;
