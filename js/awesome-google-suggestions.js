@@ -1,48 +1,77 @@
-var awesomeGoogleSuggestions
 (function($) {
+	var awesomeGoogleSuggestions
+		awesomeGoogleSuggestions = {
+			init: function() {
+				$(document).on('keydown', '.awesome-google-suggestion-input', function(e) {
+					if (e.keyCode == 13) {
+						var text = $(this).val()
+						var target = $(this)
+						awesomeGoogleSuggestions.displayGoogleData(text, target)
+					}
+				})
+				// cancel default input behaivor
+				$(".awesome-google-suggestion-input").keydown(function(e) {
+					if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+						e.preventDefault()
+					}
+				});
 
-	awesomeGoogleSuggestions = {
-		init: function() {
-			$(document).on('keyup', '.awesome-google-suggestion-input', function(e) {
-        e.preventDefault()
+				$('.awesome-google-suggestion-input').on('hover', function(e) {
+					$('.awesome-google-suggestion-results').show()
+				}).on('click', function(e) {
+					$('.awesome-google-suggestion-results').hide()
+				})
 
-				var text = $(this).val()
-        console.log(text)
-        awesomeGoogleSuggestions.getGoogleData(text)
-			})
-      // cancel default input behaivor
-      $(".awesome-google-suggestion-input").keydown(function(e) {
-          if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
-              return false;
-          } else {
-              return true;
-          }
-      });
+				$(document).on('mouseleave', '.awesome-google-suggestion-results', function(e) {
+					$('.awesome-google-suggestion-results').hide()
+				})
+			},
+
+			displayGoogleData: function(text, target) {
+				var text = {
+					text: text
+				}
+				var args = $.extend({}, text, awesome_google_suggestions_args)
+				// console.log(args)
+				$.ajax({
+					url: awesome_google_suggestions_uri,
+					async: true,
+					type: 'GET',
+					dataType: 'json',
+					data: args,
+					beforeSend: function() {},
+					success: function(res) {
+						// console.log(res)
+						if (Object.keys(res).length && res.CompleteSuggestion !== 'undefined') {
+							$('.awesome-google-suggestion-results').remove()
+							target.after('<p class="awesome-google-suggestion-results"></p>')
+							if (res.CompleteSuggestion.length > 1) {
+								for (var i = 0; i < res.CompleteSuggestion.length; i++) {
+									var output = res.CompleteSuggestion[i].suggestion['@attributes'].data
+									$('.awesome-google-suggestion-results').append(output + '<br/>')
+                  $('.awesome-google-suggestion-results').show()
+								}
+							} else {
+								var output = res.CompleteSuggestion.suggestion['@attributes'].data
+								target.after('<p class="awesome-google-suggestion-results">' + output + '</p>')
+                $('.awesome-google-suggestion-results').show()
+							}
+
+						} else {
+							$('.awesome-google-suggestion-results').remove()
+							target.after('<p class="awesome-google-suggestion-results">検索結果がありません</p>')
+              $('.awesome-google-suggestion-results').show()
+						}
+
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						console.log('error')
+					},
+					complete: function(xhr, event) {}
+				})
+			}
 		},
 
-    getGoogleData: function(text) {
-      var args = $.extend({}, awesome_google_suggestions_args)
-      console.log(awesome_google_suggestions_uri)
-      $.ajax({
-        url: awesome_google_suggestions_uri,
-        async: true,
-        type: 'POST',
-        dataType: 'json',
-        data: args,
-        beforeSend: function(){
-        },
-        success: function(res) {
-          console.log('success')
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          console.log('error')
-        },
-        complete: function(xhr,event){
-        }
-        })
-      }
-	},
+		$(document).ready(awesomeGoogleSuggestions.init)
 
-	$(document).ready(awesomeGoogleSuggestions.init)
-
-})(jQuery)
+	})(jQuery)
