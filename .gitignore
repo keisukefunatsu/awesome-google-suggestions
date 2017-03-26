@@ -1,4 +1,8 @@
-# Setting for wordpress
+# Ignore release folder
+release
+node_modules
+
+# Settings for wordpress
 *.log
 
 # For mac

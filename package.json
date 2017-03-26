@@ -1,0 +1,19 @@
+{
+  "name": "awesome-google-suggestion",
+  "version": "1.0.0",
+  "description": "gulp",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "release": "gulp release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keisukefunatsu/awesome-google-suggestions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}
