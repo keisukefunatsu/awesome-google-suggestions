@@ -49,8 +49,8 @@
 								for (var i = 0; i < res.CompleteSuggestion.length; i++) {
 									var output = res.CompleteSuggestion[i].suggestion['@attributes'].data
 									$('.awesome-google-suggestion-results').append(output + '<br/>')
-                  $('.awesome-google-suggestion-results').show()
 								}
+                $('.awesome-google-suggestion-results').show()
 							} else {
 								var output = res.CompleteSuggestion.suggestion['@attributes'].data
 								target.after('<p class="awesome-google-suggestion-results">' + output + '</p>')
