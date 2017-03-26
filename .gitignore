@@ -1,5 +1,5 @@
 # Ignore release folder
-release
+awesome-google-suggestions
 node_modules
 
 # Settings for wordpress

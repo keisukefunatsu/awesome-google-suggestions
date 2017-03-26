@@ -63,11 +63,11 @@ class DisplayGoogleSuggestions
         echo '<input class="awesome-google-suggestion-input" type="text" placeholder="Enter words here" name="" value="">';
 
         $ajax_url = admin_url('admin-ajax.php');
-        // $awesome_nonce = wp_create_nonce( 'awesome-google-suggestions' );
+        $awesome_nonce = wp_create_nonce( 'awesome-google-suggestions' );
 
         $awesome_args = array(
           'action' => 'awesome_google_suggestions',
-          // 'nonce'  => $awesome_nonce,
+          'nonce'  => $awesome_nonce,
         ); ?>
 
         <style media="screen">
@@ -140,6 +140,14 @@ class DisplayGoogleSuggestions
 
     public function wp_ajax_awesome_google_suggestions()
     {
+        nocache_headers();
+
+        if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], 'awesome-google-suggestions' ) ) {
+          return;
+        }
+
+        header( 'Content-Type: application/javascript; charset=UTF-8' );
+
         if (isset($_GET['text'])) {
             $text = sanitize_text_field($_GET['text']);
             $url = 'https://www.google.com/complete/search?hl=ja&output=toolbar&ie=utf_8&oe=utf_8&q=' . $text ;
