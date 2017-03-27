@@ -1,7 +1,7 @@
 # Ignore release folder
 awesome-google-suggestions
 node_modules
-
+vendor
 # Settings for wordpress
 *.log
 

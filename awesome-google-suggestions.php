@@ -63,7 +63,7 @@ class DisplayGoogleSuggestions
         echo '<input class="awesome-google-suggestion-input" type="text" placeholder="Enter words here" name="" value="">';
 
         $ajax_url = admin_url('admin-ajax.php');
-        $awesome_nonce = wp_create_nonce( 'awesome-google-suggestions' );
+        $awesome_nonce = wp_create_nonce('awesome-google-suggestions');
 
         $awesome_args = array(
           'action' => 'awesome_google_suggestions',
@@ -123,13 +123,15 @@ class DisplayGoogleSuggestions
      * @param  none
      * @return none
      */
-    public function admin_enqueue_scripts()
+    public function admin_enqueue_scripts($hook_suffix)
     {
-        wp_enqueue_script('awesome-google-suggestion',
-        plugins_url('js/awesome-google-suggestions.js', __FILE__),
-        array( 'jquery' ),
-        filemtime(dirname(__FILE__) . '/js/awesome-google-suggestions.js')
-      );
+        if ('post-new.php' === $hook_suffix || 'post.php' === $hook_suffix) {
+            wp_enqueue_script('awesome-google-suggestion',
+            plugins_url('js/awesome-google-suggestions.js', __FILE__),
+            array( 'jquery' ),
+            filemtime(dirname(__FILE__) . '/js/awesome-google-suggestions.js')
+            );
+        }
     }
     /**
      * wp-ajax-script
@@ -142,11 +144,11 @@ class DisplayGoogleSuggestions
     {
         nocache_headers();
 
-        if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( $_GET['nonce'], 'awesome-google-suggestions' ) ) {
-          return;
+        if (! isset($_GET['nonce']) || ! wp_verify_nonce($_GET['nonce'], 'awesome-google-suggestions')) {
+            return;
         }
 
-        header( 'Content-Type: application/javascript; charset=UTF-8' );
+        header('Content-Type: application/javascript; charset=UTF-8');
 
         if (isset($_GET['text'])) {
             $text = sanitize_text_field($_GET['text']);
