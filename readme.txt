@@ -1,9 +1,11 @@
 === AWESOME Google Suggestion ===
 Contributors: keisukefunatsu
-Tags: goggle-suggestion
+Tags: input, suggestion, google
 Requires at least: 4.0
 Tested up to: 4.7
 Stable tag: 4.7.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 AWESOME Google Suggestion will enable us to show google suggestion for input words
 
@@ -23,6 +25,11 @@ AWESOME Google Suggestion will enable us to show google suggestion for input wor
 * It installs it in `wp-content/plugins`.
 * The plug-in is made effective.
 * Open 'posts' and you will see 'Suggetion box'
+
+= Contributors =
+* [Keisuke Funatsu](https://awe-some.net/)
+
+== Frequently Asked Questions ==
 
 == Changelog ==
 

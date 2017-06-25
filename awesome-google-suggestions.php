@@ -5,7 +5,7 @@
  * Description: This plugin allows you to check word count when editing text
  * Version: 0.0.1
  * Author: AWESOME Co.,Ltd.
- * Author URI: https://awe-some.net
+ * Author URI: https://github.com/keisukefunatsu
  * Text Domain: awesome-google-suggestion
  * Domain Path: /languages
  * License: GPL v2 or later
@@ -48,7 +48,6 @@ class DisplayGoogleSuggestions
     public function plugins_loaded()
     {
 			add_action('wp_ajax_awesome_google_suggestions', array( $this, 'wp_ajax_awesome_google_suggestions' ));
-			add_action('wp_ajax_nopriv_awesome_google_suggestions', array( $this, 'wp_ajax_awesome_google_suggestions' ));
 			add_action('edit_form_after_title', array( $this, 'display_suggestions'  ));
 			add_action('admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ));
     }

@@ -11,7 +11,6 @@
 
 class BasicTest extends WP_UnitTestCase
 {
-
     public function test_admin_enqueue_scripts()
     {
         // *

@@ -2,7 +2,7 @@ var gulp = require('gulp');
 
 gulp.task('release', function () {
   return gulp.src(
-       [ './*.php', './js/**/*' ],
+       [ './*.php', './js/**/*', 'readme.txt' ],
        { base: './' }
-  ).pipe( gulp.dest( './awesome-google-suggestions' ) )
+  ).pipe( gulp.dest( './dist' ) )
 })

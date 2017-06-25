@@ -48,12 +48,12 @@
 							if (res.CompleteSuggestion.length > 1) {
 								for (var i = 0; i < res.CompleteSuggestion.length; i++) {
 									var output = res.CompleteSuggestion[i].suggestion['@attributes'].data
-									$('.awesome-google-suggestion-results').append(output + '<br/>')
+									$('.awesome-google-suggestion-results').append('<a href="https://www.google.co.jp/search?q=' + output + '">' + output + '<a><br/>')
 								}
                 $('.awesome-google-suggestion-results').show()
 							} else {
 								var output = res.CompleteSuggestion.suggestion['@attributes'].data
-								target.after('<p class="awesome-google-suggestion-results">' + output + '</p>')
+								target.after('<p class="awesome-google-suggestion-results"><a href="https://www.google.co.jp/search?q=' + output + '">' + output + '<a></p>')
                 $('.awesome-google-suggestion-results').show()
 							}
 
